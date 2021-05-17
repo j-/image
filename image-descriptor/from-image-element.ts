@@ -6,8 +6,10 @@ export const getImageDescriptorFromImageElement = (image: HTMLImageElement): Ima
   const url = cleanURL(image.src);
   if (url !== '') {
     const id = getImageDescriptorFromURL(url);
-    const { width, height } = image;
-    if (width > 0 && height > 0) {
+    const { naturalWidth, naturalHeight, width, height } = image;
+    if (naturalWidth > 0 && naturalHeight > 0) {
+      id.dimensions = { width: naturalWidth, height: naturalHeight };
+    } else if (width > 0 && height > 0) {
       id.dimensions = { width, height };
     }
     return id;
