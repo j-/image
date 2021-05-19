@@ -1,5 +1,6 @@
 export const ALEXANDER_CUTS_THE_GORDIAN_KNOT_JPG = 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Alexander_cuts_the_Gordian_Knot.jpg';
 export const ANDROID_CHROME_192_BY_192_PNG = 'file:///Users/j/Projects/web/libs/storybook/static/android-chrome-512x512.png';
+export const LOCALHOST_BLOB_URL = 'blob:http://localhost:3000/457d5bd3-ccfd-44e3-8008-79d2f39b4563';
 export const RAW_1_BY_1_TRANSPARENT_PIXEL_PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 export const RAW_1_BY_1_TRANSPARENT_PIXEL_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
 
