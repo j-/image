@@ -11,6 +11,5 @@ export * from './from-resource-urls';
 export * from './from-string';
 export * from './from-uri-list';
 export * from './from-url';
-export * from './index';
 export * from './types';
 export * from './utils';
