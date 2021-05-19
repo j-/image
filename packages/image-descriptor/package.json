@@ -1,0 +1,16 @@
+{
+  "name": "image-descriptor",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --env=jsdom"
+  },
+  "author": "J Hoeks <j@skeoh.com>",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "is-url": "^1.2.4",
+    "jsdom": "^16.5.3"
+  }
+}
