@@ -5,6 +5,7 @@ export const RAW_1_BY_1_TRANSPARENT_PIXEL_GIF = 'data:image/gif;base64,R0lGODlhA
 
 export class MockFileList implements FileList {
   [index: number]: File;
+  [Symbol.iterator] = jest.fn();
   length = 0;
   item = jest.fn();
 }
@@ -15,6 +16,7 @@ export const mockFileList = (defaults: Partial<MockFileList> = {}): MockFileList
 
 export class MockDataTransferItemList implements DataTransferItemList {
   [index: number]: DataTransferItem;
+  [Symbol.iterator] = jest.fn();
   length = 0;
   add = jest.fn();
   clear = jest.fn();
