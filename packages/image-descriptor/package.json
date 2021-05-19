@@ -1,7 +1,7 @@
 {
   "name": "image-descriptor",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest --env=jsdom"
