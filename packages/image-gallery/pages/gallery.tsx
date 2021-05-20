@@ -61,7 +61,7 @@ const Gallery: React.FC = () => {
       <ol>
         {ids.map((id, i) => (
           <li key={`${i}-${id.url}`}>
-            <img src={id.url} height="100" />
+            <img src={id.url} height="100" crossOrigin="anonymous" />
           </li>
         ))}
       </ol>
