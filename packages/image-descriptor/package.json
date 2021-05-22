@@ -12,5 +12,9 @@
   "dependencies": {
     "is-url": "^1.2.4",
     "jsdom": "^16.5.3"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   }
 }
