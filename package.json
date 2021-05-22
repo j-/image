@@ -29,7 +29,8 @@
   "dependencies": {
     "image-descriptor": "file:packages/image-descriptor",
     "image-gallery": "file:packages/image-gallery",
-    "image-origin-clean": "file:packages/image-origin-clean"
+    "image-origin-clean": "file:packages/image-origin-clean",
+    "image-store": "file:packages/image-store"
   },
   "jest": {
     "preset": "ts-jest",
