@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { ImageDescriptor, getImageDescriptorsFromDataTransfer } from 'image-descriptor';
+import GalleryImage from '../components/GalleryImage';
 import styles from '../styles/Home.module.css';
 
 const Gallery: React.FC = () => {
@@ -54,9 +55,7 @@ const Gallery: React.FC = () => {
 
       <ol>
         {ids.map((id, i) => (
-          <li key={`${i}-${id.url}`}>
-            <img src={id.url} height="100" crossOrigin="anonymous" />
-          </li>
+          <GalleryImage key={`${i}-${id.url}`} {...id} />
         ))}
       </ol>
     </div>

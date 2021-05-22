@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "image-descriptor": "file:../image-descriptor",
+    "image-origin-clean": "file:../image-origin-clean",
     "next": "10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
