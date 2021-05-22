@@ -1,10 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { ImageDescriptor, getImageDescriptorsFromDataTransfer } from 'image-descriptor';
 import styles from '../styles/Home.module.css';
 
 const Gallery: React.FC = () => {
   const [ids, setIDs] = useState<ImageDescriptor[]>([]);
+
+  const handleDataTransfer = useCallback((dt: DataTransfer) => {
+    const newIDs = getImageDescriptorsFromDataTransfer(dt);
+    console.group('Handle data transfer');
+    dt.types.forEach((type) => {
+      console.log(type, JSON.stringify(dt.getData(type)));
+    });
+    console.info('New images', newIDs.length, newIDs);
+    console.groupEnd();
+    setIDs([
+      ...ids,
+      ...newIDs,
+    ]);
+  }, [ids]);
 
   useEffect(() => {
     const handleDragover = (e: DragEvent) => {
@@ -13,31 +27,11 @@ const Gallery: React.FC = () => {
 
     const handleDrop = (e: DragEvent) => {
       e.preventDefault();
-      const newIDs = getImageDescriptorsFromDataTransfer(e.dataTransfer);
-      console.group('Handle drop');
-      e.dataTransfer.types.forEach((type) => {
-        console.log(type, JSON.stringify(e.dataTransfer.getData(type)));
-      });
-      console.info('New images', newIDs.length, newIDs);
-      console.groupEnd();
-      setIDs([
-        ...ids,
-        ...newIDs,
-      ]);
+      handleDataTransfer(e.dataTransfer);
     };
 
     const handlePaste = (e: ClipboardEvent) => {
-      const newIDs = getImageDescriptorsFromDataTransfer(e.clipboardData);
-      console.group('Handle paste');
-      e.clipboardData.types.forEach((type) => {
-        console.log(type, JSON.stringify(e.clipboardData.getData(type)));
-      });
-      console.info('New images', newIDs.length, newIDs);
-      console.groupEnd();
-      setIDs([
-        ...ids,
-        ...newIDs,
-      ]);
+      handleDataTransfer(e.clipboardData);
     };
 
     window.addEventListener('dragover', handleDragover);
@@ -49,7 +43,7 @@ const Gallery: React.FC = () => {
       window.removeEventListener('drop', handleDrop);
       document.removeEventListener('paste', handlePaste);
     };
-  }, []);
+  }, [handleDataTransfer]);
 
   return (
     <div className={styles.container}>
