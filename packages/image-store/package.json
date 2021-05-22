@@ -3,8 +3,16 @@
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "J Hoeks <j@skeoh.om>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "image-descriptor": "file:../image-descriptor",
+    "redux": "^4.1.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
 }
