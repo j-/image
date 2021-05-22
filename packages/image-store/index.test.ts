@@ -1,6 +1,11 @@
 import { createStore, Store } from 'redux';
 import { addImageDescriptors } from './actions';
-import rootReducer, { RootReducerState, INITIAL_STATE, getAllImageURLs } from '.';
+import rootReducer, {
+  getAllImageURLs,
+  getImageDescriptorForURL,
+  INITIAL_STATE,
+  RootReducerState,
+} from '.';
 
 let store: Store<RootReducerState>;
 
@@ -49,5 +54,20 @@ describe('addImageDescriptors()', () => {
     store.dispatch(action);
     const state = store.getState();
     expect(getAllImageURLs(state)).toHaveLength(1);
+  });
+
+  it('merges information from multiple descriptors', () => {
+    const action = addImageDescriptors([
+      { url: 'http://localhost/a.png', type: 'image/png' },
+      { url: 'http://localhost/a.png', size: 1e6 },
+    ]);
+    store.dispatch(action);
+    const state = store.getState();
+    const id = getImageDescriptorForURL(state, 'http://localhost/a.png');
+    expect(id).toEqual({
+      url: 'http://localhost/a.png',
+      type: 'image/png',
+      size: 1e6,
+    });
   });
 });

@@ -16,7 +16,10 @@ const reducer: Reducer<RootReducerState> = (state = INITIAL_STATE, action) => {
   if (isActionAddImageDescriptors(action)) {
     const descriptorsByUrl = { ...state.descriptorsByUrl };
     for (const id of action.payload.ids) {
-      descriptorsByUrl[id.url] = id;
+      descriptorsByUrl[id.url] = {
+        ...descriptorsByUrl[id.url],
+        ...id,
+      };
     }
     return {
       ...state,
