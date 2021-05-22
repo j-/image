@@ -1,11 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Head from 'next/head';
-import { ImageDescriptor, getImageDescriptorsFromDataTransfer } from 'image-descriptor';
+import { getImageDescriptorsFromDataTransfer } from 'image-descriptor';
 import GalleryImage from '../components/GalleryImage';
 import styles from '../styles/Home.module.css';
+import { getAllImageURLs } from 'image-store';
+import { addImageDescriptors } from 'image-store/actions';
 
 const Gallery: React.FC = () => {
-  const [ids, setIDs] = useState<ImageDescriptor[]>([]);
+  const urls = useSelector(getAllImageURLs);
+  const dispatch = useDispatch();
 
   const handleDataTransfer = useCallback((dt: DataTransfer) => {
     const newIDs = getImageDescriptorsFromDataTransfer(dt);
@@ -15,11 +19,8 @@ const Gallery: React.FC = () => {
     });
     console.info('New images', newIDs.length, newIDs);
     console.groupEnd();
-    setIDs([
-      ...ids,
-      ...newIDs,
-    ]);
-  }, [ids]);
+    dispatch(addImageDescriptors(newIDs));
+  }, [urls]);
 
   useEffect(() => {
     const handleDragover = (e: DragEvent) => {
@@ -54,8 +55,8 @@ const Gallery: React.FC = () => {
       </Head>
 
       <ol>
-        {ids.map((id, i) => (
-          <GalleryImage key={`${i}-${id.url}`} {...id} />
+        {urls.map((url, i) => (
+          <GalleryImage key={`${i}-${url}`} url={url} />
         ))}
       </ol>
     </div>

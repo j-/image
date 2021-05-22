@@ -32,3 +32,9 @@ export default reducer;
 export const getAllImageURLs = (state: RootReducerState) => (
   Object.keys(state.descriptorsByUrl)
 );
+
+export const getImageDescriptorForURL = (state: RootReducerState, url: string) => (
+  getAllImageURLs(state)
+    .map((url) => state.descriptorsByUrl[url])
+    .find((id) => id.url === url)
+);
