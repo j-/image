@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Head from 'next/head';
 import { getImageDescriptorsFromDataTransfer } from 'image-descriptor';
-import GalleryImage from '../components/GalleryImage';
+import StoreGalleryImage from '../components/StoreGalleryImage';
 import styles from '../styles/Home.module.css';
 import { getAllImageURLs } from 'image-store';
 import { addImageDescriptors } from 'image-store/actions';
@@ -56,7 +56,7 @@ const Gallery: React.FC = () => {
 
       <ol>
         {urls.map((url, i) => (
-          <GalleryImage key={`${i}-${url}`} url={url} />
+          <StoreGalleryImage key={`${i}-${url}`} url={url} />
         ))}
       </ol>
     </div>

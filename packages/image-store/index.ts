@@ -41,3 +41,16 @@ export const getImageDescriptorForURL = (state: RootReducerState, url: string) =
     .map((url) => state.descriptorsByUrl[url])
     .find((id) => id.url === url)
 );
+
+export const getImageAttributes = (state: RootReducerState, url: string) => {
+  const id = getImageDescriptorForURL(state, url);
+  const attributes: Partial<HTMLImageElement> = {
+    src: url,
+  };
+  if (!id) return attributes;
+  if (id.dimensions) {
+    attributes.width = id.dimensions.width;
+    attributes.height = id.dimensions.height;
+  }
+  return attributes;
+};
