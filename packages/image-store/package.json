@@ -8,8 +8,7 @@
   "author": "J Hoeks <j@skeoh.om>",
   "license": "MIT",
   "dependencies": {
-    "image-descriptor": "file:../image-descriptor",
-    "redux": "^4.1.0"
+    "image-descriptor": "file:../image-descriptor"
   },
   "jest": {
     "preset": "ts-jest",
