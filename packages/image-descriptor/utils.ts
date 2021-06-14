@@ -24,3 +24,10 @@ export const dataURIToBlob = (dataURI: string): Blob => {
   }
   return new Blob([arrayBuffer], { type });
 };
+
+/** Adapted from https://developer.mozilla.org/en-US/docs/Web/API/ClipboardItem#writing_to_clipboard */
+export const imageURLToBlob = async (imageURL: string): Promise<Blob> => {
+  const data = await fetch(imageURL);
+  const blob = await data.blob();
+  return blob;
+};
