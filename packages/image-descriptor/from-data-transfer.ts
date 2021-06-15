@@ -3,10 +3,12 @@ import { getImageDescriptorsFromFileList } from './from-file-list';
 import { getImageDescriptorsFromResourceURLs } from './from-resource-urls';
 import { getImageDescriptorsFromURIList } from './from-uri-list';
 import { getImageDescriptorsFromHTML } from './from-html';
+import { getImageDescriptorsFromString } from './from-string';
 
 export const DATA_RESOURCE_URLS = 'resourceurls';
 export const DATA_URI_LIST = 'text/uri-list';
 export const DATA_HTML = 'text/html';
+export const DATA_TEXT = 'text/plain';
 
 export const getImageDescriptorsFromDataTransfer = (dataTransfer: DataTransfer, flags: ImageDescriptorFlags = 0): ImageDescriptor[] => {
   if (dataTransfer.files.length > 0) {
@@ -23,6 +25,10 @@ export const getImageDescriptorsFromDataTransfer = (dataTransfer: DataTransfer, 
   if (dataTransfer.types.includes(DATA_HTML)) {
     const item = dataTransfer.getData(DATA_HTML);
     return getImageDescriptorsFromHTML(item, flags);
+  }
+  if (dataTransfer.types.includes(DATA_TEXT)) {
+    const item = dataTransfer.getData(DATA_TEXT);
+    return getImageDescriptorsFromString(item, flags);
   }
   if (flags & THROW_IF_EMPTY) {
     throw new Error('Could not find any images in data transfer');
