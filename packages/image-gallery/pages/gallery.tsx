@@ -19,7 +19,9 @@ const Gallery: React.FC = () => {
     });
     console.info('New images', newIDs.length, newIDs);
     console.groupEnd();
-    dispatch(addImageDescriptors(newIDs));
+    if (newIDs.length) {
+      dispatch(addImageDescriptors(newIDs));
+    }
   }, [urls]);
 
   useEffect(() => {
