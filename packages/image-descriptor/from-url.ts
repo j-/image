@@ -1,8 +1,10 @@
 import isURL from 'is-url';
 import { ImageDescriptor } from './types';
 import { cleanURL } from './utils';
+import { getImageDescriptorFromDataURI } from './from-data-uri';
 
 const blobExpr = /^blob:/;
+const dataExpr = /^data:/;
 
 export const getImageDescriptorFromURL = (url: string): ImageDescriptor => {
   const clean = cleanURL(url);
@@ -11,6 +13,10 @@ export const getImageDescriptorFromURL = (url: string): ImageDescriptor => {
     return {
       url: clean,
     };
+  }
+  const isDataURI = dataExpr.test(clean);
+  if (isDataURI) {
+    return getImageDescriptorFromDataURI(url);
   }
   if (isURL(clean)) {
     return {
