@@ -5,7 +5,6 @@ export * from './from-data-uri';
 export * from './from-file-input';
 export * from './from-file-list';
 export * from './from-file';
-export * from './from-html';
 export * from './from-image-element';
 export * from './from-resource-urls';
 export * from './from-string';
