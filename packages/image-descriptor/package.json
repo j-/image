@@ -16,8 +16,5 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"
-  },
-  "devDependencies": {
-    "jest-environment-jsdom": "^28.1.0"
   }
 }
