@@ -16,7 +16,7 @@
   "description": "",
   "devDependencies": {
     "@types/is-url": "^1.2.29",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^28.1.0",
     "@types/node": "^17.0.38",
     "@types/offscreencanvas": "^2019.7.0",
     "@types/react": "^18.0.10",
