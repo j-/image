@@ -1,13 +1,11 @@
 module.exports = {
   webpack: (config, options) => {
-    Object.assign(config, {
-      node: {
-        fs: 'empty',
-        child_process: 'empty',
-        net: 'empty',
-        tls: 'empty',
-      },
-    });
+    config.resolve.fallback = {
+      fs: false,
+      child_process: false,
+      net: false,
+      tls: false,
+    };
     config.module.rules.push({
       test: /\.tsx?|\.ts?$/,
       use: [options.defaultLoaders.babel],
