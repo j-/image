@@ -9,6 +9,6 @@ export const getImageDescriptorFromCanvas = (canvas: HTMLCanvasElement): ImageDe
   const { width, height } = canvas;
   if (width > 0 && height > 0) {
     id.dimensions = { width, height };
-  };
+  }
   return id;
 };
