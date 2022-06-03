@@ -1,9 +1,8 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Head from 'next/head';
-import { getImageDescriptorsFromDataTransfer } from 'image-descriptor';
+import { getImageDescriptorsFromDataTransfer, getImageDescriptorsFromFileInput } from 'image-descriptor';
 import StoreGalleryImage from '../components/StoreGalleryImage';
-import styles from '../styles/Home.module.css';
 import { getAllImageURLs } from 'image-store';
 import { addImageDescriptors } from 'image-store/actions';
 
@@ -23,6 +22,13 @@ const Gallery: React.FC = () => {
       dispatch(addImageDescriptors(newIDs));
     }
   }, [urls]);
+
+  const handleChangeFiles = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const newIDs = getImageDescriptorsFromFileInput(e.currentTarget);
+    if (newIDs.length) {
+      dispatch(addImageDescriptors(newIDs));
+    }
+  }, []);
 
   useEffect(() => {
     const handleDragover = (e: DragEvent) => {
@@ -50,18 +56,20 @@ const Gallery: React.FC = () => {
   }, [handleDataTransfer]);
 
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Gallery</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <input type="file" onChange={handleChangeFiles} multiple />
 
       <ol>
         {urls.map((url, i) => (
           <StoreGalleryImage key={`${i}-${url}`} url={url} />
         ))}
       </ol>
-    </div>
+    </>
   );
 };
 
