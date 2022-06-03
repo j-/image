@@ -7,6 +7,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "link-convert": "lerna link convert",
+    "lint": "eslint .",
     "start": "turbo run start",
     "test": "turbo run test"
   },
