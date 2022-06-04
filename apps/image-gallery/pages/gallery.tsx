@@ -17,12 +17,6 @@ const Gallery: React.FC = () => {
 
   const handleDataTransfer = useCallback((dt: DataTransfer) => {
     const newIDs = getImageDescriptorsFromDataTransfer(dt);
-    console.group('Handle data transfer');
-    dt.types.forEach((type) => {
-      console.log(type, JSON.stringify(dt.getData(type)));
-    });
-    console.info('New images', newIDs.length, newIDs);
-    console.groupEnd();
     if (newIDs.length) {
       dispatch(addImageDescriptors(newIDs));
     }
