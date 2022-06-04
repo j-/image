@@ -1,7 +1,12 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Head from 'next/head';
-import { getImageDescriptorsFromDataTransfer, getImageDescriptorsFromFileInput } from 'image-descriptor';
+import {
+  getImageDescriptorsFromDataTransfer,
+  getImageDescriptorsFromDirectoryPicker,
+  getImageDescriptorsFromFileInput,
+  getImageDescriptorsFromFilePicker,
+} from 'image-descriptor';
 import StoreGalleryImage from '../components/StoreGalleryImage';
 import { getAllImageURLs } from 'image-store';
 import { addImageDescriptors } from 'image-store/actions';
@@ -27,6 +32,28 @@ const Gallery: React.FC = () => {
     const newIDs = getImageDescriptorsFromFileInput(e.currentTarget);
     if (newIDs.length) {
       dispatch(addImageDescriptors(newIDs));
+    }
+  }, []);
+
+  const handleClickSelectFiles = useCallback(async () => {
+    try {
+      const newIDs = await getImageDescriptorsFromFilePicker({ multiple: true });
+      if (newIDs.length) {
+        dispatch(addImageDescriptors(newIDs));
+      }
+    } catch (err) {
+      // Ignore errors
+    }
+  }, []);
+
+  const handleClickSelectDirectory = useCallback(async () => {
+    try {
+      const newIDs = await getImageDescriptorsFromDirectoryPicker();
+      if (newIDs.length) {
+        dispatch(addImageDescriptors(newIDs));
+      }
+    } catch (err) {
+      // Ignore errors
     }
   }, []);
 
@@ -62,7 +89,9 @@ const Gallery: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <input type="file" onChange={handleChangeFiles} multiple />
+      <input type="file" onChange={handleChangeFiles} multiple /><br />
+      <button type="button" onClick={handleClickSelectFiles}>Select files</button>
+      <button type="button" onClick={handleClickSelectDirectory}>Select directory</button>
 
       <ol>
         {urls.map((url, i) => (
