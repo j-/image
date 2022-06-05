@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Head from 'next/head';
 import {
+  getImageDescriptorsFromClipboard,
   getImageDescriptorsFromDataTransfer,
   getImageDescriptorsFromDirectoryPicker,
   getImageDescriptorsFromFileInput,
@@ -26,6 +27,17 @@ const Gallery: React.FC = () => {
     const newIDs = getImageDescriptorsFromFileInput(e.currentTarget);
     if (newIDs.length) {
       dispatch(addImageDescriptors(newIDs));
+    }
+  }, []);
+
+  const handleClickPasteFiles = useCallback(async () => {
+    try {
+      const newIDs = await getImageDescriptorsFromClipboard();
+      if (newIDs.length) {
+        dispatch(addImageDescriptors(newIDs));
+      }
+    } catch (err) {
+      // Ignore errors
     }
   }, []);
 
@@ -84,6 +96,7 @@ const Gallery: React.FC = () => {
       </Head>
 
       <input type="file" onChange={handleChangeFiles} multiple /><br />
+      <button type="button" onClick={handleClickPasteFiles}>Paste files</button>
       <button type="button" onClick={handleClickSelectFiles}>Select files</button>
       <button type="button" onClick={handleClickSelectDirectory}>Select directory</button>
 
