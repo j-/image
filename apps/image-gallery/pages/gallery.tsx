@@ -10,7 +10,7 @@ import {
 } from 'image-descriptor';
 import StoreGalleryImage from '../components/StoreGalleryImage';
 import { getAllImageURLs } from 'image-store';
-import { addImageDescriptors } from 'image-store/actions';
+import { addImageDescriptors, reset } from 'image-store/actions';
 
 const Gallery: React.FC = () => {
   const urls = useSelector(getAllImageURLs);
@@ -63,6 +63,10 @@ const Gallery: React.FC = () => {
     }
   }, []);
 
+  const handleClickClear = useCallback(() => {
+    dispatch(reset());
+  }, []);
+
   useEffect(() => {
     const handleDragover = (e: DragEvent) => {
       e.preventDefault();
@@ -98,7 +102,8 @@ const Gallery: React.FC = () => {
       <input type="file" onChange={handleChangeFiles} multiple /><br />
       <button type="button" onClick={handleClickPasteFiles}>Paste files</button>
       <button type="button" onClick={handleClickSelectFiles}>Select files</button>
-      <button type="button" onClick={handleClickSelectDirectory}>Select directory</button>
+      <button type="button" onClick={handleClickSelectDirectory}>Select directory</button><br />
+      <button type="button" onClick={handleClickClear}>Clear files</button>
 
       <ol>
         {urls.map((url, i) => (

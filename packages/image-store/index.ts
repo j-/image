@@ -1,6 +1,6 @@
 import { ImageDescriptor } from 'image-descriptor';
 import { Reducer } from 'redux';
-import { isActionAddImageDescriptors } from './actions';
+import { isActionAddImageDescriptors, isActionReset } from './actions';
 
 export type RootReducerState = {
   descriptorsByUrl: {
@@ -13,6 +13,10 @@ export const INITIAL_STATE: RootReducerState = {
 };
 
 const reducer: Reducer<RootReducerState> = (state = INITIAL_STATE, action) => {
+  if (isActionReset(action)) {
+    return INITIAL_STATE;
+  }
+
   if (isActionAddImageDescriptors(action)) {
     const descriptorsByUrl = { ...state.descriptorsByUrl };
     for (const id of action.payload.ids) {
