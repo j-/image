@@ -3,12 +3,16 @@ import { getImageDescriptorsFromFileList } from './from-file-list';
 import { getImageDescriptorsFromResourceURLs } from './from-resource-urls';
 import { getImageDescriptorsFromURIList } from './from-uri-list';
 import { getImageDescriptorsFromString } from './from-string';
+import { getImageDescriptorsFromDataTransferItemList } from './from-data-transfer-item-list';
 
 export const DATA_RESOURCE_URLS = 'resourceurls';
 export const DATA_URI_LIST = 'text/uri-list';
 export const DATA_TEXT = 'text/plain';
 
-export const getImageDescriptorsFromDataTransfer = (dataTransfer: DataTransfer, flags: ImageDescriptorFlags = 0): ImageDescriptor[] => {
+export const getImageDescriptorsFromDataTransfer = async (dataTransfer: DataTransfer, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  if (dataTransfer.items.length > 0) {
+    return getImageDescriptorsFromDataTransferItemList(dataTransfer.items);
+  }
   if (dataTransfer.files.length > 0) {
     return getImageDescriptorsFromFileList(dataTransfer.files, flags);
   }

@@ -16,9 +16,9 @@ const Gallery: React.FC = () => {
   const urls = useSelector(getAllImageURLs);
   const dispatch = useDispatch();
 
-  const handleDataTransfer = useCallback((dt: DataTransfer) => {
+  const handleDataTransfer = useCallback(async (dt: DataTransfer) => {
     try {
-      const newIDs = getImageDescriptorsFromDataTransfer(dt);
+      const newIDs = await getImageDescriptorsFromDataTransfer(dt);
       if (newIDs.length) {
         dispatch(addImageDescriptors(newIDs));
       }

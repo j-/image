@@ -3,6 +3,8 @@ export * from './from-canvas';
 export * from './from-clipboard-item';
 export * from './from-clipboard-items';
 export * from './from-clipboard';
+export * from './from-data-transfer-item-list';
+export * from './from-data-transfer-item';
 export * from './from-data-transfer';
 export * from './from-data-uri';
 export * from './from-directory-picker';
