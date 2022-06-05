@@ -1,0 +1,11 @@
+{
+  "name": "tsconfig",
+  "version": "0.0.0",
+  "description": "",
+  "main": "base.json",
+  "scripts": {
+    "test": "echo \"Warn: no test specified\" && exit 0"
+  },
+  "author": "J Hoeks <j@skeoh.om>",
+  "license": "MIT"
+}

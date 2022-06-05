@@ -1,9 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
-  "exclude": [
-    "**/*.test.ts",
-    "**/__test__/**"
-  ],
+  "extends": "tsconfig/base.json",
   "compilerOptions": {
     "lib": [
       "DOM"

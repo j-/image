@@ -7,5 +7,8 @@
     "test": "echo \"Warn: no test specified\" && exit 0"
   },
   "author": "J Hoeks <j@skeoh.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "tsconfig": "file:../tsconfig"
+  }
 }

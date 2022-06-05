@@ -10,6 +10,9 @@
   "dependencies": {
     "image-descriptor": "file:../image-descriptor"
   },
+  "devDependencies": {
+    "tsconfig": "file:../tsconfig"
+  },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"

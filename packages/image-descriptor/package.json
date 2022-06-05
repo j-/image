@@ -13,6 +13,9 @@
     "get-urls": "^9.2.1",
     "is-url": "^1.2.4"
   },
+  "devDependencies": {
+    "tsconfig": "file:../tsconfig"
+  },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"
