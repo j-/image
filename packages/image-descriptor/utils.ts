@@ -15,7 +15,7 @@ export const isImageMediaType = (mediaType: string): boolean => {
 
 /** Adapted from https://stackoverflow.com/a/12300351 */
 export const dataURIToBlob = (dataURI: string): Blob => {
-  const byteString = atob(dataURI.split(',', 2)[1]);
+  const byteString = Buffer.from(dataURI.split(',', 2)[1], 'base64').toString();
   const type = getDataURIMediaType(dataURI);
   const arrayBuffer = new ArrayBuffer(byteString.length);
   const intArray = new Uint8Array(arrayBuffer);
