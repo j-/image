@@ -26,6 +26,9 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "next": {
+      "rootDir": "apps/image-gallery"
     }
   },
   "rules": {

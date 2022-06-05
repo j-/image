@@ -3,6 +3,7 @@ import { ImageDescriptor } from 'image-descriptor';
 
 export const ACTION_RESET = 'RESET';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ActionReset extends Action<typeof ACTION_RESET> {}
 
 export const isActionReset = (action: Action): action is ActionReset => (
