@@ -23,6 +23,7 @@ const GalleryImage: React.FC<Props> = ({ url }) => {
 
   return (
     <div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={url} height="100" /><br />
       <button type="button" onClick={checkIsClean}>Check if image origin is clean</button><br />
       {
