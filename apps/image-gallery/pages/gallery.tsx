@@ -17,16 +17,24 @@ const Gallery: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleDataTransfer = useCallback((dt: DataTransfer) => {
-    const newIDs = getImageDescriptorsFromDataTransfer(dt);
-    if (newIDs.length) {
-      dispatch(addImageDescriptors(newIDs));
+    try {
+      const newIDs = getImageDescriptorsFromDataTransfer(dt);
+      if (newIDs.length) {
+        dispatch(addImageDescriptors(newIDs));
+      }
+    } catch (err) {
+      console.error(err);
     }
   }, [urls]);
 
   const handleChangeFiles = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIDs = getImageDescriptorsFromFileInput(e.currentTarget);
-    if (newIDs.length) {
-      dispatch(addImageDescriptors(newIDs));
+    try {
+      const newIDs = getImageDescriptorsFromFileInput(e.currentTarget);
+      if (newIDs.length) {
+        dispatch(addImageDescriptors(newIDs));
+      }
+    } catch (err) {
+      console.error(err);
     }
   }, []);
 
@@ -37,7 +45,7 @@ const Gallery: React.FC = () => {
         dispatch(addImageDescriptors(newIDs));
       }
     } catch (err) {
-      // Ignore errors
+      console.error(err);
     }
   }, []);
 
@@ -48,7 +56,7 @@ const Gallery: React.FC = () => {
         dispatch(addImageDescriptors(newIDs));
       }
     } catch (err) {
-      // Ignore errors
+      console.error(err);
     }
   }, []);
 
@@ -59,7 +67,7 @@ const Gallery: React.FC = () => {
         dispatch(addImageDescriptors(newIDs));
       }
     } catch (err) {
-      // Ignore errors
+      console.error(err);
     }
   }, []);
 

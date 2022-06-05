@@ -11,6 +11,7 @@ export const getImageDescriptorsFromFilePicker = async (options: OpenFilePickerO
       }
       return [];
     }
+    return images;
   } catch (err) {
     if (flags & THROW_IF_EMPTY) {
       throw new Error('Expected to get one or more image files from file picker');
