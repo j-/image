@@ -5,10 +5,10 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "turbo run build",
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --parallel",
     "link-convert": "lerna link convert",
     "lint": "eslint .",
-    "start": "turbo run start",
+    "start": "turbo run start --parallel",
     "test": "turbo run test"
   },
   "author": "J Hoeks <j@skeoh.com>",
