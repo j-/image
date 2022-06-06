@@ -4,32 +4,29 @@ import { getImageDescriptorsFromResourceURLs } from './from-resource-urls';
 import { getImageDescriptorsFromURIList } from './from-uri-list';
 import { getImageDescriptorsFromString } from './from-string';
 import { getImageDescriptorsFromDataTransferItemList } from './from-data-transfer-item-list';
+import { assertNotEmpty } from './assert';
 
 export const DATA_RESOURCE_URLS = 'resourceurls';
 export const DATA_URI_LIST = 'text/uri-list';
 export const DATA_TEXT = 'text/plain';
 
 export const getImageDescriptorsFromDataTransfer = async (dataTransfer: DataTransfer, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  let results: ImageDescriptor[] = [];
   if (dataTransfer.items.length > 0) {
-    return getImageDescriptorsFromDataTransferItemList(dataTransfer.items);
-  }
-  if (dataTransfer.files.length > 0) {
-    return getImageDescriptorsFromFileList(dataTransfer.files, flags);
-  }
-  if (dataTransfer.types.includes(DATA_RESOURCE_URLS)) {
+    results = await getImageDescriptorsFromDataTransferItemList(dataTransfer.items);
+  } else if (dataTransfer.files.length > 0) {
+    results = getImageDescriptorsFromFileList(dataTransfer.files);
+  } else if (dataTransfer.types.includes(DATA_RESOURCE_URLS)) {
     const item = dataTransfer.getData(DATA_RESOURCE_URLS);
-    return getImageDescriptorsFromResourceURLs(item, flags);
-  }
-  if (dataTransfer.types.includes(DATA_URI_LIST)) {
+    results = getImageDescriptorsFromResourceURLs(item);
+  } else if (dataTransfer.types.includes(DATA_URI_LIST)) {
     const item = dataTransfer.getData(DATA_URI_LIST);
-    return getImageDescriptorsFromURIList(item, flags);
-  }
-  if (dataTransfer.types.includes(DATA_TEXT)) {
+    results = getImageDescriptorsFromURIList(item);
+  } else if (dataTransfer.types.includes(DATA_TEXT)) {
     const item = dataTransfer.getData(DATA_TEXT);
-    return getImageDescriptorsFromString(item, flags);
-  }
-  if (flags & THROW_IF_EMPTY) {
+    results = getImageDescriptorsFromString(item);
+  } else if (flags & THROW_IF_EMPTY) {
     throw new Error('Could not find any images in data transfer');
   }
-  return [];
+  return assertNotEmpty(results, flags, 'Expected to get one or more image files from data transfer');
 };

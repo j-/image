@@ -1,5 +1,6 @@
-import { ImageDescriptor, ImageDescriptorFlags, THROW_IF_EMPTY } from './types';
+import { ImageDescriptor, ImageDescriptorFlags } from './types';
 import { getImageDescriptorsFromDataTransferItem } from './from-data-transfer-item';
+import { assertNotEmpty } from './assert';
 
 export const getImageDescriptorsFromDataTransferItemList = async (dataTransferItemList: DataTransferItemList, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
   console.debug('getImageDescriptorsFromDataTransferItemList()');
@@ -8,11 +9,5 @@ export const getImageDescriptorsFromDataTransferItemList = async (dataTransferIt
     const item = dataTransferItemList[i];
     results.push(...await getImageDescriptorsFromDataTransferItem(item));
   }
-  if (results.length === 0) {
-    if (flags & THROW_IF_EMPTY) {
-      throw new Error('Expected to get one or more image files from file picker');
-    }
-    return [];
-  }
-  return results;
+  return assertNotEmpty(results, flags, 'Expected to get one or more image files from transfer item list');
 };
