@@ -1,27 +1,32 @@
 name: CI
 on: push
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm ci
-    - name: Run tests
-      run: npm t
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm ci
-    - name: Run linter
-      run: npm run lint
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    - name: Cache node modules
+      id: cache-npm
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
     - name: Install modules
       run: npm ci
+
+    - name: Run tests
+      run: npm t
+
+    - name: Run linter
+      run: npm run lint
+
     - name: Run build
       run: npm run build
