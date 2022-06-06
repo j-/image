@@ -42,7 +42,7 @@ jobs:
           ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-
 
     - name: Install modules
-      if: ${{ steps.cache-npm.outputs.cache-hit == 'true' }}
+      if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
       run: npm ci
 
     - name: Run tests
