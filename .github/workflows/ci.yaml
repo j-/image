@@ -30,6 +30,17 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
+    - name: Cache Turborepo
+      id: cache-turbo
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-turbo-repo
+      with:
+        path: ${{ github.workspace }}/.turbo/cache
+        key: ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+        restore-keys: |
+          ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-
+
     - name: Install modules
       if: ${{ steps.cache-npm.outputs.cache-hit == 'true' }}
       run: npm ci
