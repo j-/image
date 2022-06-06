@@ -13,10 +13,10 @@ jobs:
         cache-name: cache-node-modules
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
+          ${{ runner.os }}-test-${{ env.cache-name }}-
+          ${{ runner.os }}-test-
           ${{ runner.os }}-
 
     - name: Cache Turborepo
@@ -26,9 +26,9 @@ jobs:
         cache-name: cache-turbo-repo
       with:
         path: node_modules/.cache/turbo
-        key: ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+        key: ${{ runner.os }}-turbo-test-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
         restore-keys: |
-          ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-
+          ${{ runner.os }}-turbo-test-${{ hashFiles('**/package-lock.json') }}-
 
     - name: Install modules
       run: npm ci
@@ -48,10 +48,10 @@ jobs:
         cache-name: cache-node-modules
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-lint-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
+          ${{ runner.os }}-lint-${{ env.cache-name }}-
+          ${{ runner.os }}-lint-
           ${{ runner.os }}-
 
     - name: Cache Turborepo
@@ -61,9 +61,9 @@ jobs:
         cache-name: cache-turbo-repo
       with:
         path: node_modules/.cache/turbo
-        key: ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+        key: ${{ runner.os }}-turbo-lint-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
         restore-keys: |
-          ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-
+          ${{ runner.os }}-turbo-lint-${{ hashFiles('**/package-lock.json') }}-
 
     - name: Install modules
       run: npm ci
@@ -96,9 +96,9 @@ jobs:
         cache-name: cache-turbo-repo
       with:
         path: node_modules/.cache/turbo
-        key: ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+        key: ${{ runner.os }}-turbo-build-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
         restore-keys: |
-          ${{ runner.os }}-turbo-${{ hashFiles('**/package-lock.json') }}-
+          ${{ runner.os }}-turbo-build-${{ hashFiles('**/package-lock.json') }}-
 
     - name: Cache Next build
       id: cache-next
