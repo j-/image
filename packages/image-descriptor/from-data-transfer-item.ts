@@ -1,4 +1,4 @@
-import { ImageDescriptor, ImageDescriptorFlags } from './types';
+import { ImageDescriptor, ImageDescriptorFlags, THROW_IF_EMPTY } from './types';
 import { getImageDescriptorsFromString } from './from-string';
 import { getImageDescriptorsFromFileSystemHandle } from './from-file-system-handle';
 import { getImageDescriptorFromFile } from './from-file';
@@ -8,12 +8,12 @@ export const getImageDescriptorsFromDataTransferItem = async (dataTransferItem: 
   let results: ImageDescriptor[] = [];
   if (typeof dataTransferItem.getAsFileSystemHandle === 'function') {
     const handle = await dataTransferItem.getAsFileSystemHandle();
-    results = await getImageDescriptorsFromFileSystemHandle(handle);
+    results = await getImageDescriptorsFromFileSystemHandle(handle, flags & ~THROW_IF_EMPTY);
   } else if (typeof dataTransferItem.getAsFile === 'function') {
     results = [getImageDescriptorFromFile(dataTransferItem.getAsFile())];
   } else if (typeof dataTransferItem.getAsString === 'function') {
     const string = await new Promise<string>((resolve) => dataTransferItem.getAsString(resolve));
-    results = getImageDescriptorsFromString(string);
+    results = getImageDescriptorsFromString(string, flags & ~THROW_IF_EMPTY);
   }
   return assertNotEmpty(results, flags, 'Expected to get one or more image files from transfer item');
 };

@@ -1,4 +1,4 @@
-import { ImageDescriptor, ImageDescriptorFlags } from './types';
+import { ImageDescriptor, ImageDescriptorFlags, THROW_IF_EMPTY } from './types';
 import { getImageDescriptorsFromString } from './from-string';
 import { getImageDescriptorFromBlob } from './from-blob';
 import { assertNotEmpty } from './assert';
@@ -9,7 +9,7 @@ export const getImageDescriptorsFromClipboardItem = async (clipboardItem: Clipbo
     const blob = await clipboardItem.getType(type);
     if (/^text\//.test(type)) {
       const text = await blob.text();
-      results.push(...getImageDescriptorsFromString(text));
+      results.push(...getImageDescriptorsFromString(text, flags & ~THROW_IF_EMPTY));
     } else {
       results.push(getImageDescriptorFromBlob(blob));
     }

@@ -15,16 +15,16 @@ export const getImageDescriptorsFromDataTransfer = async (dataTransfer: DataTran
   if (dataTransfer.items.length > 0) {
     results = await getImageDescriptorsFromDataTransferItemList(dataTransfer.items);
   } else if (dataTransfer.files.length > 0) {
-    results = getImageDescriptorsFromFileList(dataTransfer.files);
+    results = getImageDescriptorsFromFileList(dataTransfer.files, flags & ~THROW_IF_EMPTY);
   } else if (dataTransfer.types.includes(DATA_RESOURCE_URLS)) {
     const item = dataTransfer.getData(DATA_RESOURCE_URLS);
-    results = getImageDescriptorsFromResourceURLs(item);
+    results = getImageDescriptorsFromResourceURLs(item, flags & ~THROW_IF_EMPTY);
   } else if (dataTransfer.types.includes(DATA_URI_LIST)) {
     const item = dataTransfer.getData(DATA_URI_LIST);
-    results = getImageDescriptorsFromURIList(item);
+    results = getImageDescriptorsFromURIList(item, flags & ~THROW_IF_EMPTY);
   } else if (dataTransfer.types.includes(DATA_TEXT)) {
     const item = dataTransfer.getData(DATA_TEXT);
-    results = getImageDescriptorsFromString(item);
+    results = getImageDescriptorsFromString(item, flags & ~THROW_IF_EMPTY);
   } else if (flags & THROW_IF_EMPTY) {
     throw new Error('Could not find any images in data transfer');
   }
