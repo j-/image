@@ -23,6 +23,9 @@
       "ts-jest": {
         "tsconfig": "./tsconfig.spec.json"
       }
-    }
+    },
+    "setupFilesAfterEnv": [
+      "./setupTests.ts"
+    ]
   }
 }

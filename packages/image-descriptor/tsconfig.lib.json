@@ -6,6 +6,7 @@
   ],
   "exclude": [
     "**/__test__/*",
-    "*.test.ts"
+    "*.test.ts",
+    "setupTests.ts"
   ]
 }
