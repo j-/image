@@ -19,9 +19,7 @@ const Gallery: React.FC = () => {
   const handleDataTransfer = useCallback(async (dt: DataTransfer) => {
     try {
       const newIDs = await getImageDescriptorsFromDataTransfer(dt);
-      if (newIDs.length) {
-        dispatch(addImageDescriptors(newIDs));
-      }
+      dispatch(addImageDescriptors(newIDs));
     } catch (err) {
       console.error(err);
     }
@@ -30,9 +28,7 @@ const Gallery: React.FC = () => {
   const handleChangeFiles = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const newIDs = getImageDescriptorsFromFileInput(e.currentTarget);
-      if (newIDs.length) {
-        dispatch(addImageDescriptors(newIDs));
-      }
+      dispatch(addImageDescriptors(newIDs));
     } catch (err) {
       console.error(err);
     }
@@ -41,9 +37,7 @@ const Gallery: React.FC = () => {
   const handleClickPasteFiles = useCallback(async () => {
     try {
       const newIDs = await getImageDescriptorsFromClipboard();
-      if (newIDs.length) {
-        dispatch(addImageDescriptors(newIDs));
-      }
+      dispatch(addImageDescriptors(newIDs));
     } catch (err) {
       console.error(err);
     }
@@ -52,9 +46,7 @@ const Gallery: React.FC = () => {
   const handleClickSelectFiles = useCallback(async () => {
     try {
       const newIDs = await getImageDescriptorsFromFilePicker({ multiple: true });
-      if (newIDs.length) {
-        dispatch(addImageDescriptors(newIDs));
-      }
+      dispatch(addImageDescriptors(newIDs));
     } catch (err) {
       console.error(err);
     }
@@ -63,9 +55,7 @@ const Gallery: React.FC = () => {
   const handleClickSelectDirectory = useCallback(async () => {
     try {
       const newIDs = await getImageDescriptorsFromDirectoryPicker();
-      if (newIDs.length) {
-        dispatch(addImageDescriptors(newIDs));
-      }
+      dispatch(addImageDescriptors(newIDs));
     } catch (err) {
       console.error(err);
     }

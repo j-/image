@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import { applyMiddleware, createStore, Middleware } from 'redux';
 import rootReducer, { getAllImageURLs, RootReducerState } from 'image-store';
+import { isActionAddImageDescriptors } from 'image-store/actions';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider as StoreProvider } from 'react-redux';
 import '../styles/globals.css';
@@ -16,6 +17,13 @@ const middleware: Middleware<void, RootReducerState>[] = [
         URL.revokeObjectURL(url);
       }
     }
+  },
+  /** Ignore ADD_IMAGE_DESCRIPTORS actions with no image descriptors. */
+  () => (next) => (action) => {
+    if (isActionAddImageDescriptors(action) && action.payload.ids.length === 0) {
+      return;
+    }
+    next(action);
   },
 ];
 
