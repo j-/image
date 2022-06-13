@@ -14,7 +14,7 @@ export const getImageDescriptorsFromDataTransfer = async (dataTransfer: DataTran
   console.debug('getImageDescriptorsFromDataTransfer');
   let results: ImageDescriptor[] = [];
   if (dataTransfer.items.length > 0) {
-    results = await getImageDescriptorsFromDataTransferItemList(dataTransfer.items);
+    results = await getImageDescriptorsFromDataTransferItemList(dataTransfer.items, flags & ~THROW_IF_EMPTY);
   } else if (dataTransfer.files.length > 0) {
     results = getImageDescriptorsFromFileList(dataTransfer.files, flags & ~THROW_IF_EMPTY);
   } else if (dataTransfer.types.includes(DATA_RESOURCE_URLS)) {
