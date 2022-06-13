@@ -8,17 +8,32 @@ import { isImageMediaType } from './utils';
 export const getImageDescriptorsFromDataTransferItem = async (dataTransferItem: DataTransferItem, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
   console.debug('getImageDescriptorsFromDataTransferItem');
   let results: ImageDescriptor[] = [];
-  if (typeof dataTransferItem.getAsFileSystemHandle === 'function') {
-    const handle = await dataTransferItem.getAsFileSystemHandle();
-    results = await getImageDescriptorsFromFileSystemHandle(handle, flags & ~THROW_IF_EMPTY);
-  } else if (typeof dataTransferItem.getAsFile === 'function') {
-    const file = dataTransferItem.getAsFile();
-    if (isImageMediaType(file.type) || flags & ALLOW_ALL_TYPES) {
-      results = [getImageDescriptorFromFile(file)];
+
+  (async () => {
+    if (typeof dataTransferItem.getAsFileSystemHandle === 'function') {
+      const handle = await dataTransferItem.getAsFileSystemHandle();
+      if (handle) {
+        results = await getImageDescriptorsFromFileSystemHandle(handle, flags & ~THROW_IF_EMPTY);
+        return;
+      }
     }
-  } else if (typeof dataTransferItem.getAsString === 'function') {
-    const string = await new Promise<string>((resolve) => dataTransferItem.getAsString(resolve));
-    results = getImageDescriptorsFromString(string, flags & ~THROW_IF_EMPTY);
-  }
+
+    if (typeof dataTransferItem.getAsFile === 'function') {
+      const file = dataTransferItem.getAsFile();
+      if (file && isImageMediaType(file.type) || flags & ALLOW_ALL_TYPES) {
+        results = [getImageDescriptorFromFile(file)];
+        return;
+      }
+    }
+
+    if (typeof dataTransferItem.getAsString === 'function') {
+      const string = await new Promise<string>((resolve) => dataTransferItem.getAsString(resolve));
+      if (string) {
+        results = getImageDescriptorsFromString(string, flags & ~THROW_IF_EMPTY);
+        return;
+      }
+    }
+  })();
+
   return assertNotEmpty(results, flags, 'Expected to get one or more image files from transfer item');
 };
