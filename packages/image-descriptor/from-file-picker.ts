@@ -9,7 +9,7 @@ export const getImageDescriptorsFromFilePicker = async (options: OpenFilePickerO
     results = await getImageDescriptorsFromFileSystemFileHandles(handles, flags & ~THROW_IF_EMPTY);
   } catch (err) {
     if (err.name === 'AbortError') {
-      // Use cancelled file picker. Return empty images array.
+      // User cancelled file picker. Return empty images array.
       return [];
     }
     throw err;

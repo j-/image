@@ -10,7 +10,11 @@ export const getDataURIMediaType = (dataURI: string): string => {
 };
 
 export const isImageMediaType = (mediaType: string): boolean => {
-  return /^image\/.*/.test(mediaType);
+  return /^image\//.test(mediaType);
+};
+
+export const isTextMediaType = (mediaType: string): boolean => {
+  return /^text\//.test(mediaType);
 };
 
 /** Adapted from https://stackoverflow.com/a/12300351 */
