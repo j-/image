@@ -1,11 +1,11 @@
 import { AppProps } from 'next/app';
 import { applyMiddleware, createStore, Middleware } from 'redux';
-import rootReducer, { getAllImageURLs } from 'image-store';
+import rootReducer, { getAllImageURLs, RootReducerState } from 'image-store';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider as StoreProvider } from 'react-redux';
 import '../styles/globals.css';
 
-const middleware: Middleware[] = [
+const middleware: Middleware<void, RootReducerState>[] = [
   /** Revoke object URLs whenever they are removed from the store. */
   (store) => (next) => (action) => {
     const before = getAllImageURLs(store.getState());
