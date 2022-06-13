@@ -1,22 +1,17 @@
 import isURL from 'is-url';
 import { ImageDescriptor } from './types';
-import { cleanURL } from './utils';
+import { cleanURL, isBlobURI, isDataURI } from './utils';
 import { getImageDescriptorFromDataURI } from './from-data-uri';
-
-const blobExpr = /^blob:/;
-const dataExpr = /^data:/;
 
 export const getImageDescriptorFromURL = (url: string): ImageDescriptor => {
   console.debug('getImageDescriptorFromURL');
   const clean = cleanURL(url);
-  const isBlobURL = blobExpr.test(clean);
-  if (isBlobURL && isURL(clean.replace(blobExpr, ''))) {
+  if (isBlobURI(clean) && isURL(clean.replace('blob:', ''))) {
     return {
       url: clean,
     };
   }
-  const isDataURI = dataExpr.test(clean);
-  if (isDataURI) {
+  if (isDataURI(clean)) {
     return getImageDescriptorFromDataURI(url);
   }
   if (isURL(clean)) {

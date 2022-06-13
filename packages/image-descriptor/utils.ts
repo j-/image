@@ -9,12 +9,20 @@ export const getDataURIMediaType = (dataURI: string): string => {
   return match ? match[1] : 'text/plain;charset=US-ASCII';
 };
 
-export const isImageMediaType = (mediaType: string): boolean => {
-  return /^image\//.test(mediaType);
+export const isImageMediaType = (mediaType: string): mediaType is `image/${string}` => {
+  return mediaType.startsWith('image/');
 };
 
-export const isTextMediaType = (mediaType: string): boolean => {
-  return /^text\//.test(mediaType);
+export const isTextMediaType = (mediaType: string): mediaType is `text/${string}` => {
+  return mediaType.startsWith('text/');
+};
+
+export const isBlobURI = (url: string): url is `blob:${string}` => {
+  return url.startsWith('blob:');
+};
+
+export const isDataURI = (url: string): url is `data:${string}` => {
+  return url.startsWith('data:');
 };
 
 /** Adapted from https://stackoverflow.com/a/12300351 */
