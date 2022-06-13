@@ -11,6 +11,7 @@ export const DATA_URI_LIST = 'text/uri-list';
 export const DATA_TEXT = 'text/plain';
 
 export const getImageDescriptorsFromDataTransfer = async (dataTransfer: DataTransfer, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  console.debug('getImageDescriptorsFromDataTransfer');
   let results: ImageDescriptor[] = [];
   if (dataTransfer.items.length > 0) {
     results = await getImageDescriptorsFromDataTransferItemList(dataTransfer.items);

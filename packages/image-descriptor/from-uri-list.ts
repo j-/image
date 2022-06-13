@@ -5,6 +5,7 @@ import { assertNotEmpty } from './assert';
 
 /** Data set by Chrome when dragging out of the bookmarks */
 export const getImageDescriptorsFromURIList = (uriList: string, flags: ImageDescriptorFlags = 0): ImageDescriptor[] => {
+  console.debug('getImageDescriptorsFromURIList');
   const uris = uriList.split(/\n/g);
   if (uris.length <= 1) {
     if (cleanURL(uris[0]) === '') {

@@ -2,6 +2,7 @@ import { ImageDescriptor } from './types';
 import { getImageDescriptorFromDataURI } from './from-data-uri';
 
 export const getImageDescriptorFromCanvas = (canvas: HTMLCanvasElement): ImageDescriptor => {
+  console.debug('getImageDescriptorFromCanvas');
   // `toDataURL()` takes a `type` param which can be any
   // supported MIME type. The default value is `image/png`.
   const dataURI = canvas.toDataURL();

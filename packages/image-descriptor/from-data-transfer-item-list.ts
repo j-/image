@@ -3,6 +3,7 @@ import { getImageDescriptorsFromDataTransferItem } from './from-data-transfer-it
 import { assertNotEmpty } from './assert';
 
 export const getImageDescriptorsFromDataTransferItemList = async (dataTransferItemList: DataTransferItemList, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  console.debug('getImageDescriptorsFromDataTransferItemList');
   const results: ImageDescriptor[] = [];
   for (let i = 0; i < dataTransferItemList.length; i++) {
     const item = dataTransferItemList[i];

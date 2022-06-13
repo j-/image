@@ -6,6 +6,7 @@ import { assertNotEmpty } from './assert';
 import { isImageMediaType } from './utils';
 
 export const getImageDescriptorsFromDataTransferItem = async (dataTransferItem: DataTransferItem, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  console.debug('getImageDescriptorsFromDataTransferItem');
   let results: ImageDescriptor[] = [];
   if (typeof dataTransferItem.getAsFileSystemHandle === 'function') {
     const handle = await dataTransferItem.getAsFileSystemHandle();

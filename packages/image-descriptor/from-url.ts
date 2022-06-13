@@ -7,6 +7,7 @@ const blobExpr = /^blob:/;
 const dataExpr = /^data:/;
 
 export const getImageDescriptorFromURL = (url: string): ImageDescriptor => {
+  console.debug('getImageDescriptorFromURL');
   const clean = cleanURL(url);
   const isBlobURL = blobExpr.test(clean);
   if (isBlobURL && isURL(clean.replace(blobExpr, ''))) {

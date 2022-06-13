@@ -3,6 +3,7 @@ import { getImageDescriptorsFromFileSystemFileHandles } from './from-file-system
 import { ImageDescriptor, ImageDescriptorFlags, THROW_IF_EMPTY } from './types';
 
 export const getImageDescriptorsFromFilePicker = async (options: OpenFilePickerOptions = {}, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  console.debug('getImageDescriptorsFromFilePicker');
   let results: ImageDescriptor[] = [];
   try {
     const handles = await window.showOpenFilePicker(options);

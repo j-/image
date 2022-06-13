@@ -3,6 +3,7 @@ import { getImageDescriptorFromURL } from './from-url';
 import { cleanURL } from './utils';
 
 export const getImageDescriptorFromImageElement = (image: HTMLImageElement): ImageDescriptor => {
+  console.debug('getImageDescriptorFromImageElement');
   const url = cleanURL(image.src);
   if (url !== '') {
     const id = getImageDescriptorFromURL(url);

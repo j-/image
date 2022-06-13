@@ -4,6 +4,7 @@ import { assertNotEmpty } from './assert';
 
 /** Data set by VS Code when dragging out of the editor */
 export const getImageDescriptorsFromResourceURLs = (resourceURLs: string, flags: ImageDescriptorFlags = 0): ImageDescriptor[] => {
+  console.debug('getImageDescriptorsFromResourceURLs');
   let urls: string[];
   try {
     urls = JSON.parse(resourceURLs);

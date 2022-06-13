@@ -6,6 +6,7 @@ import { ALLOW_ALL_TYPES, ImageDescriptor, ImageDescriptorFlags, THROW_IF_EMPTY 
 import { isImageMediaType } from './utils';
 
 export const getImageDescriptorsFromFileSystemHandle = async (handle: FileSystemHandle, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  console.debug('getImageDescriptorsFromFileSystemHandle');
   let results: ImageDescriptor[] = [];
   if (isFileSystemFileHandle(handle)) {
     const image = await getImageDescriptorFromFileSystemFileHandle(handle);

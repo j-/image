@@ -4,6 +4,7 @@ import { isImageMediaType } from './utils';
 import { assertNotEmpty } from './assert';
 
 export const getImageDescriptorsFromFileList = (fileList: ArrayLike<File>, flags: ImageDescriptorFlags = 0): ImageDescriptor[] => {
+  console.debug('getImageDescriptorsFromFileList');
   let results = Array.from(fileList).map(getImageDescriptorFromFile);
   if (flags & ~ALLOW_ALL_TYPES) {
     results = results.filter((image) => isImageMediaType(image.type));

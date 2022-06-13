@@ -2,6 +2,7 @@ import { getImageDescriptorsFromFileSystemDirectoryHandle } from './from-file-sy
 import { ImageDescriptor, ImageDescriptorFlags } from './types';
 
 export const getImageDescriptorsFromDirectoryPicker = async (options: DirectoryPickerOptions = {}, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  console.debug('getImageDescriptorsFromDirectoryPicker');
   try {
     const handle = await window.showDirectoryPicker(options);
     return getImageDescriptorsFromFileSystemDirectoryHandle(handle, flags);

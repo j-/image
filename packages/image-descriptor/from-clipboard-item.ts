@@ -5,6 +5,7 @@ import { assertNotEmpty } from './assert';
 import { isImageMediaType } from './utils';
 
 export const getImageDescriptorsFromClipboardItem = async (clipboardItem: ClipboardItem, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  console.debug('getImageDescriptorsFromClipboardItem');
   const results: ImageDescriptor[] = [];
   for (const type of clipboardItem.types) {
     const blob = await clipboardItem.getType(type);

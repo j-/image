@@ -3,6 +3,7 @@ import { getImageDescriptorsFromFileSystemHandles } from './from-file-system-han
 import { ImageDescriptor, ImageDescriptorFlags, THROW_IF_EMPTY } from './types';
 
 export const getImageDescriptorsFromFileSystemDirectoryHandle = async (directoryHandle: FileSystemDirectoryHandle, flags: ImageDescriptorFlags = 0): Promise<ImageDescriptor[]> => {
+  console.debug('getImageDescriptorsFromFileSystemDirectoryHandle');
   const handles: FileSystemHandle[] = [];
   for await (const entry of directoryHandle.values()) {
     handles.push(entry);
