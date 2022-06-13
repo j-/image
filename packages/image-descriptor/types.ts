@@ -24,3 +24,7 @@ export enum ImageDescriptorFlag {
 
 export const THROW_IF_EMPTY = ImageDescriptorFlag.THROW_IF_EMPTY;
 export const ALLOW_ALL_TYPES = ImageDescriptorFlag.ALLOW_ALL_TYPES;
+
+export const isFlagSet = (flags: ImageDescriptorFlags, maybeSet: ImageDescriptorFlag) => (
+  (flags & maybeSet) === maybeSet
+);

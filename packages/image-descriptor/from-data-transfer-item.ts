@@ -1,4 +1,4 @@
-import { ALLOW_ALL_TYPES, ImageDescriptor, ImageDescriptorFlags, THROW_IF_EMPTY } from './types';
+import { ALLOW_ALL_TYPES, ImageDescriptor, ImageDescriptorFlags, isFlagSet, THROW_IF_EMPTY } from './types';
 import { getImageDescriptorsFromString } from './from-string';
 import { getImageDescriptorsFromFileSystemHandle } from './from-file-system-handle';
 import { getImageDescriptorFromFile } from './from-file';
@@ -20,7 +20,7 @@ export const getImageDescriptorsFromDataTransferItem = async (dataTransferItem: 
 
     if (typeof dataTransferItem.getAsFile === 'function') {
       const file = dataTransferItem.getAsFile();
-      if (file && isImageMediaType(file.type) || flags & ALLOW_ALL_TYPES) {
+      if (file && isImageMediaType(file.type) || isFlagSet(flags, ALLOW_ALL_TYPES)) {
         results = [getImageDescriptorFromFile(file)];
         return;
       }

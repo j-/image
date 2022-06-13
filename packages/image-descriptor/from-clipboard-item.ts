@@ -1,4 +1,4 @@
-import { ALLOW_ALL_TYPES, ImageDescriptor, ImageDescriptorFlags, THROW_IF_EMPTY } from './types';
+import { ALLOW_ALL_TYPES, ImageDescriptor, ImageDescriptorFlags, isFlagSet, THROW_IF_EMPTY } from './types';
 import { getImageDescriptorsFromString } from './from-string';
 import { getImageDescriptorFromBlob } from './from-blob';
 import { assertNotEmpty } from './assert';
@@ -12,7 +12,7 @@ export const getImageDescriptorsFromClipboardItem = async (clipboardItem: Clipbo
     if (isTextMediaType(type)) {
       const text = await blob.text();
       results.push(...getImageDescriptorsFromString(text, flags & ~THROW_IF_EMPTY));
-    } else if (isImageMediaType(type) || flags & ALLOW_ALL_TYPES) {
+    } else if (isImageMediaType(type) || isFlagSet(flags, ALLOW_ALL_TYPES)) {
       results.push(getImageDescriptorFromBlob(blob));
     }
   }
