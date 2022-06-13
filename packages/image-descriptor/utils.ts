@@ -25,6 +25,30 @@ export const isDataURI = (url: string): url is `data:${string}` => {
   return url.startsWith('data:');
 };
 
+const defaultExtensions = [
+  '.apng',
+  '.avif',
+  '.gif',
+  '.jfif',
+  '.jpeg',
+  '.jpg',
+  '.pjp',
+  '.pjpeg',
+  '.png',
+  '.svg',
+  '.webp',
+];
+
+export const isImageURL = (url: string, extensions = defaultExtensions): boolean => {
+  url = url.toLowerCase();
+  for (const extension of extensions) {
+    if (url.endsWith(extension)) {
+      return true;
+    }
+  }
+  return false;
+};
+
 /** Adapted from https://stackoverflow.com/a/12300351 */
 export const dataURIToBlob = (dataURI: string): Blob => {
   const byteString = Buffer.from(dataURI.split(',', 2)[1], 'base64').toString();
