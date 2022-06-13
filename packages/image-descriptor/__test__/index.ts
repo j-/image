@@ -44,3 +44,18 @@ export class MockDataTransfer implements DataTransfer {
 export const mockDataTransfer = (defaults: Partial<MockDataTransfer> = {}): MockDataTransfer => (
   Object.assign(new MockDataTransfer(), defaults)
 );
+
+export class MockClipboardItem implements ClipboardItem {
+  types: string[] = [];
+  getType = jest.fn();
+}
+
+export const mockClipboardItem = (defaults: Partial<MockClipboardItem> = {}): MockClipboardItem => (
+  Object.assign(new MockClipboardItem(), defaults)
+);
+
+export const stringToBlob = (string: string, type = 'text/plain'): Blob => {
+  const blob = new Blob([string], { type });
+  blob.text = async () => string;
+  return blob;
+};
