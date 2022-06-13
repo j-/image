@@ -1,3 +1,12 @@
 {
-  "extends": "tsconfig/base.json"
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "tsconfig/tsconfig.base.json",
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

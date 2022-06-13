@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "main": "index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build tsconfig.lib.json",
     "test": "jest --env=jsdom"
   },
   "author": "J Hoeks <j@skeoh.com>",
@@ -18,6 +18,11 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "./tsconfig.spec.json"
+      }
+    }
   }
 }

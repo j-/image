@@ -1,5 +1,14 @@
 {
-  "extends": "tsconfig/next.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "tsconfig/tsconfig.next.json",
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
